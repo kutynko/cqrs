@@ -7,22 +7,64 @@ using CqrsTest.Models;
 
 namespace CqrsTest.Controllers
 {
-    public class HomeController : Controller
-    {
-		[Route("")]
-        public ActionResult Index()
-        {
-			var data = new ProposalsProjection();
+	public class HomeController : Controller
+	{
+		private readonly ProposalsProjection _data;
 
-            return View(data.GetProposals());
-        }
-
-		[Route("proposal/{id:int?}")]
-		public ActionResult Edit(int? id)
+		public HomeController(ProposalsProjection data)
 		{
+			_data = data;
+		}
 
+		[Route("")]
+		public ActionResult Index()
+		{
+			return View(_data.GetProposals());
+		}
+
+		[Route("proposal/{id:int}")]
+		public ActionResult Edit(int id)
+		{
+			return View(_data.GetProposals().First(p => p.Id == id));
+		}
+
+		[Route("proposal/")]
+		public ActionResult Add()
+		{
 			return View();
 		}
 
-    }
+
+		[HttpPost]
+		[Route("proposal/{id:int}")]
+		public ActionResult Edit(int id, string student, string actions, string reasons)
+		{
+			var proposal = _data.GetProposals().First(p => p.Id == id);
+
+			proposal.Student = student;
+			proposal.Actions = actions.Split(',').Select(s => s.Trim()).ToList();
+			proposal.Reasons = reasons.Split(',').Select(s => s.Trim()).ToList();
+
+			_data.SaveProposal(proposal);
+
+			return RedirectToAction("Index");
+		}
+
+		[HttpPost]
+		[Route("proposal/")]
+		public ActionResult Add(string student, string actions, string reasons)
+		{
+			var proposal = new Proposal
+			{
+				Id = (int)DateTime.Now.Ticks,
+				Student = student,
+				Actions = actions.Split(',').Select(s => s.Trim()).ToList(),
+				Reasons = reasons.Split(',').Select(s => s.Trim()).ToList(),
+			};
+
+			_data.SaveProposal(proposal);
+
+			return RedirectToAction("Index");
+		}
+	}
 }

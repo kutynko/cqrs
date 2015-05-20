@@ -1,34 +1,36 @@
 ﻿@model List<CqrsTest.Models.Proposal>
-@{
-	ViewBag.Title = "Index";
-}
-
-@section styles
-{
-	@Styles.Render("~/Content/proposals")
-}
-
-<h2>Предствления</h2>
-
-<a href="@Url.Action("Edit")">Создать новое</a>
-<table class="proposals-list">
-	<thead>
-		<tr>
-			<th>ID</th>
-			<th>Student</th>
-			<th>Actions</th>
-			<th>Reasons</th>
-		</tr>
-	</thead>
-
-	@foreach (var item in Model)
-	{
-		<tr>
-			<td>@item.Id</td>
-			<td>@item.Student</td>
-			<td>@string.Join(",", item.Actions)</td>
-			<td>@string.Join(",", item.Reasons)</td>
-		</tr>
+	@{
+		ViewBag.Title = "Index";
 	}
 
-</table>
+	@section styles
+{
+		@Styles.Render("~/Content/proposals")
+	}
+
+	<h2>Предствления</h2>
+
+	<a href="@Url.Action("Edit")">Создать новое</a>
+	<table class="proposals-list">
+		<thead>
+			<tr>
+				<th></th>
+				<th>ID</th>
+				<th>Student</th>
+				<th>Actions</th>
+				<th>Reasons</th>
+			</tr>
+		</thead>
+
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td><a href="@Url.Action("Edit", new {id = item.Id})">Редактировать</a></td>
+				<td>@item.Id</td>
+				<td>@item.Student</td>
+				<td>@string.Join(",", item.Actions)</td>
+				<td>@string.Join(",", item.Reasons)</td>
+			</tr>
+		}
+
+	</table>

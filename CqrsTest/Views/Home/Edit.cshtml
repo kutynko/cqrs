@@ -11,6 +11,7 @@
 <h2>Представление</h2>
 
 <form method="post" action="@Url.Action("Edit")" class="proposal-form">
+	<input type="hidden" value="@(Model == null ? 0 : Model.Id)" />
 	<label for="txtStudent">Студент: </label><input type="text" id="txtStudent" name="student" /><br />
 	<label for="txtActions">Действия: </label><input type="text" id="txtActions" name="actions" /><br />
 	<label for="txtReasons">Основания: </label><input type="text" id="txtReasons" name="reasons" /><br />

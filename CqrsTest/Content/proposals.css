@@ -2,6 +2,34 @@
 	width: 100%;
 }
 
-	.proposals-list tr {
+	.proposals-list td {
 		border-top: 1px solid lightgray;
+	}
+
+
+.proposal-form {
+	border-left: 1px solid lightgray;
+	border-right: 1px solid lightgray;
+	margin: 0 auto;
+	width: 60%;
+}
+
+	.proposal-form label {
+		display: block;
+		float: left;
+		margin: 4px;
+		text-align: right;
+		width: 200px;
+	}
+
+	.proposal-form input[type=text] {
+		clear: right;
+		display: block;
+		float: left;
+		margin: 4px;
+		width: 50%;
+	}
+
+	.proposal-form input[type=submit] {
+		margin-left: 212px;
 	}

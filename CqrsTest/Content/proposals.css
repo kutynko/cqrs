@@ -1,0 +1,7 @@
+﻿.proposals-list {
+	width: 100%;
+}
+
+	.proposals-list tr {
+		border-top: 1px solid lightgray;
+	}

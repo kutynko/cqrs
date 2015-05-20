@@ -1,0 +1,19 @@
+﻿@model CqrsTest.Models.Proposal
+@{
+	ViewBag.Title = "Edit";
+}
+
+@section styles
+{
+	@Styles.Render("~/Content/proposals")
+}
+
+<h2>Представление</h2>
+
+<form method="post" action="@Url.Action("Edit")" class="proposal-form">
+	<label for="txtStudent">Студент: </label><input type="text" id="txtStudent" name="student" /><br />
+	<label for="txtActions">Действия: </label><input type="text" id="txtActions" name="actions" /><br />
+	<label for="txtReasons">Основания: </label><input type="text" id="txtReasons" name="reasons" /><br />
+	<input type="submit" value="Сохранить" />
+</form>
+<a href="@Url.Action("Index")">Назад</a>
